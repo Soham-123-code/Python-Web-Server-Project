@@ -19,16 +19,22 @@ print('Listening on port %s..... ' % SERVER_PORT)
 
 while True:
     #Wait for client connection
-    client_connection, client_address = server_socket.accerpt()
+    client_connection, client_address = server_socket.accept()
 
     #GET the client request
     request = client_connection.recv(1024).decode()
     print(request)
 
+    #Get the contents of the htdocs/index.html
+    fin = open('htdocs/index.html')
+    content = fin.read()
+    fin.close()
+
+
     #Send HTTP Response
-    response = 'HTTP/1.0 200OK\n\Hello World'
+    response = 'HTTP/1.0 200OK\n\n<h1>Hello World</h1>'
     client_connection.sendall(response.encode())
-    client_connection.close(_)
+    client_connection.close()
 
 #close scoket
 server_socket.close()
