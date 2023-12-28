@@ -32,7 +32,7 @@ while True:
 
 
     #Send HTTP Response
-    response = 'HTTP/1.0 200OK\n\n<h1>Hello World</h1>'
+    response = 'HTTP/1.0 200OK\n\n' + content
     client_connection.sendall(response.encode())
     client_connection.close()
 
