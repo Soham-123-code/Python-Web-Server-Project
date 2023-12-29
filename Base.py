@@ -30,13 +30,21 @@ while True:
     filename = headers[0].split()[1]
 
     #Get the contents of the file
-    if filename == '/':
+    if filename == '/favicon.ico':
         filename = '/index.html'
 
-    fin = open('htdocs/' + filename)
-    content = fin.read()
-    fin.close()
+    if filename == '/':
+        filename= '/index.html'
 
+    try:
+        fin = open('htdocs/' + filename)
+        content = fin.read()
+        fin.close()
+
+        response = 'HTTP/1.0 200OK\n\n' + content
+    except FileNotFoundError:
+
+        response = 'HTTP/1.0 404 NOT FOUND\n\nFile Not Found'
 
     #Send HTTP Response
     response = 'HTTP/1.0 200OK\n\n' + content
